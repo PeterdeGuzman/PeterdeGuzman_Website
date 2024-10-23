@@ -1,6 +1,6 @@
 # Duke Cloud Club Zola Personal Website Template 
 
-## STEPS
+## Steps
 1. https://www.getzola.org/documentation/getting-started/installation/
 2. `mkdir <insert name of folder>` -> `cd` -> `zola init`
 3. https://www.getzola.org/themes/ -> run git submodule add "this is the github repository for the theme.git"
@@ -21,5 +21,5 @@
 3. Try out other services such as Vercel and Github Pages
 
 
-## Referenes
+## References
 1. https://www.getzola.org/documentation/deployment/aws-s3/
