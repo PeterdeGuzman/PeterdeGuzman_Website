@@ -1,0 +1,32 @@
+name: Build and Publish to AWS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        # enable submodules to download themse
+        with:
+          submodules: true 
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: zola@0.18.0
+      # build website 
+      - name: Build
+        run: zola build
+      # deploy to AWS assumign you have correct policies for user
+      - uses: reggionick/s3-deploy@v4
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          folder: public
+          bucket: ${{ secrets.S3_BUCKET }}
+          # private is false to enable public ACL
+          private: false
+          # change this if necessary depednding on bucket region
+          bucket-region: us-east-2
